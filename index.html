@@ -64,7 +64,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 #bust span{font-family:'Black Han Sans';font-size:22px;color:#ff4d6d;text-shadow:0 2px 0 #000;letter-spacing:.1em}
 #bust .bar{margin-top:4px;border-color:#ff4d6d}
 #bust .bar i{background:#ff2d55}
-#hint{position:absolute;left:50%;bottom:26%;transform:translateX(-50%);font-weight:800;font-size:15px;color:#fff;background:rgba(0,0,0,.55);padding:8px 14px;border-radius:6px;white-space:nowrap;transition:opacity .6s}
+#hint{position:absolute;left:50%;bottom:30%;transform:translateX(-50%);font-weight:800;font-size:15px;color:#fff;background:rgba(0,0,0,.55);padding:8px 14px;border-radius:6px;white-space:nowrap;transition:opacity .6s}
 #topbtns{position:absolute;left:50%;transform:translateX(-50%);top:max(12px,env(safe-area-inset-top));display:flex;gap:8px;pointer-events:auto}
 .ib{width:38px;height:38px;border-radius:50%;background:rgba(0,0,0,.45);border:1.5px solid rgba(255,255,255,.25);font-size:16px;display:grid;place-items:center}
 
@@ -72,7 +72,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 #touch{position:fixed;inset:0;pointer-events:none}
 #touch.hidden{display:none}
 #joyZone{position:absolute;left:0;top:25%;bottom:0;width:55%;pointer-events:auto}
-#joyBase{position:absolute;width:120px;height:120px;margin:-60px 0 0 -60px;border-radius:50%;border:2px solid rgba(255,255,255,.3);background:rgba(0,0,0,.25);left:90px;bottom:0;top:auto;opacity:.5}
+#joyBase{position:absolute;width:120px;height:120px;margin:-60px 0 0 -60px;border-radius:50%;border:2px solid rgba(255,255,255,.3);background:rgba(0,0,0,.25);left:100px;bottom:30px;top:auto;opacity:.5}
 #joyKnob{position:absolute;left:50%;top:50%;width:54px;height:54px;margin:-27px 0 0 -27px;border-radius:50%;background:rgba(255,255,255,.75);box-shadow:0 0 16px rgba(63,240,255,.6)}
 .tb{position:absolute;pointer-events:auto;border-radius:50%;display:grid;place-items:center;font-family:'Bungee';font-size:13px;letter-spacing:.05em;color:#fff;border:2px solid rgba(255,255,255,.4);background:rgba(0,0,0,.4)}
 #bNitro{right:max(22px,env(safe-area-inset-right));bottom:calc(max(22px,env(safe-area-inset-bottom)) + 10px);width:92px;height:92px;border-color:var(--cyan);box-shadow:0 0 18px rgba(63,240,255,.35) inset}
@@ -1742,7 +1742,7 @@ function update(rdt) {
   boomL.intensity *= Math.exp(-7 * dt);
   // camera
   G.trauma = Math.max(0, G.trauma - rdt * 1.4);
-  const aspectZoom = camera.aspect < 1 ? Math.pow(1 / camera.aspect, 0.55) : 1;
+  const aspectZoom = camera.aspect < 1 ? Math.pow(1 / camera.aspect, 0.8) : 1;
   let cx, cz, D, el;
   if (player) {
     const sp = Math.hypot(player.vx, player.vz);
