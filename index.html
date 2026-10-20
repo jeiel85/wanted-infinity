@@ -93,6 +93,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .keys{margin-top:22px;display:flex;flex-wrap:wrap;justify-content:center;gap:8px 14px;font-size:13px;color:var(--dim)}
 .keys kbd{font-family:'Bungee';font-size:11px;color:#fff;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);border-bottom-width:3px;border-radius:5px;padding:2px 7px;margin-right:4px}
 .best{margin-top:16px;font-weight:800;font-size:14px;color:var(--gold)}
+.src{margin-top:18px;display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--dim);text-decoration:none;opacity:.8}.src:hover,.src:focus-visible{color:var(--cyan);opacity:1}
 #over{background:rgba(6,8,20,.55);backdrop-filter:blur(2px)}
 .card{width:min(440px,100%);background:var(--panel);border:1.5px solid rgba(255,255,255,.16);border-radius:16px;padding:26px 24px 22px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.6)}
 .stamp{font-family:'Bungee';font-size:clamp(46px,11vw,64px);line-height:1;transform:rotate(-5deg);display:inline-block;padding:6px 16px;border:5px solid currentColor;border-radius:8px}
@@ -133,6 +134,9 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
   "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
 } }
 </script>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 </head>
 <body>
 <canvas id="c"></canvas>
@@ -175,6 +179,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
     </div>
     <div class="keys hidden" id="keysTouch"><span>왼손: 가고 싶은 방향으로 스틱</span><span>오른손: 니트로 · 드리프트</span></div>
     <div class="best" id="bestLine"></div>
+    <a class="src" href="https://github.com/jeiel85/wanted-infinity" target="_blank" rel="noopener noreferrer" aria-label="GitHub 소스 코드 (새 탭에서 열림)"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> GitHub</a>
   </div>
 </div>
 
@@ -1834,6 +1839,13 @@ if (DEBUG) {
     sim(sec, dt = 1 / 60, onStep) { for (let t = 0; t < sec; t += dt) { onStep && onStep(); update(dt); if (G.capture) { G.capture = false; showResult(); } } },
     snap(w, h) { const keep = PR; PR = 1; applySize(w, h, false); update(1 / 60); composer.render(); const url = renderer.domElement.toDataURL('image/jpeg', 0.9); PR = keep; applySize(); return url; },
     bench(n = 30) { const gl = renderer.getContext(); let u = 0, r = 0; for (let i = 0; i < n; i++) { let t = performance.now(); update(1 / 60); u += performance.now() - t; t = performance.now(); composer.render(); gl.finish(); r += performance.now() - t; } return { updateMs: u / n, renderMs: r / n, calls: renderer.info.render.calls, tris: renderer.info.render.triangles }; } };
+}
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch((err) => console.warn('서비스 워커 등록 실패:', err));
+  });
 }
 </script>
 </body>
